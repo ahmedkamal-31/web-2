@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XML List</title>
+</head>
+
+<body>
+
+    <h2>Items List</h2>
+
+    <ul id="data"></ul>
+
+    <script>
+
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+
+            if (this.readyState == 4 && this.status == 200) {
+
+                let xmlDoc = this.responseXML;
+
+                let items = xmlDoc.documentElement;
+
+                let item = items.firstChild;
+
+                let list = document.getElementById("data");
+
+                // Skip spaces and get the first item
+                while (item && item.nodeType != 1) {
+                    item = item.nextSibling;
+                }
+
+                while (item) {
+
+                    let name = item.firstChild;
+
+                    // Skip spaces
+                    while (name && name.nodeType != 1) {
+                        name = name.nextSibling;
+                    }
+
+                    let price = name.nextSibling;
+
+                    // Skip spaces
+                    while (price && price.nodeType != 1) {
+                        price = price.nextSibling;
+                    }
+
+                    let description = price.nextSibling;
+
+                    // Skip spaces
+                    while (description && description.nodeType != 1) {
+                        description = description.nextSibling;
+                    }
+
+                    let li = document.createElement("li");
+
+                    li.innerHTML =
+                        "<b>" + name.textContent + "</b><br>" +
+                        "Price: " + price.textContent + "<br>" +
+                        "Description: " + description.textContent;
+
+                    list.appendChild(li);
+
+                    // Move to next item
+                    item = item.nextSibling;
+
+                    while (item && item.nodeType != 1) {
+                        item = item.nextSibling;
+                    }
+                }
+            }
+        };
+
+        xhttp.open("GET", "index.xml", true);
+
+        xhttp.send();
+
+    </script>
+
+</body>
+</html>

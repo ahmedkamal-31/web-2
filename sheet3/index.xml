@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<items>
+    <item>
+        <name>Item 1</name>
+        <price>19.99</price>
+        <description>Description for Item 1</description>
+    </item>
+
+    <item>
+        <name>Item 2</name>
+        <price>29.99</price>
+        <description>Description for Item 2</description>
+    </item>
+</items>
